@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character List</title>
+</head>
+<body>
+<h1>Character List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Line</th>
+        <th>AD/AP</th>
+        <th>Image</th>
+        <th>Health</th>
+        <th>Attack</th>
+        <th>Speed</th>
+        <th>Rune</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="character : ${character.body}">
+        <td th:text="${character.name}"></td>
+        <td th:text="${character.line}"></td>
+        <td th:text="${character.adAp}"></td>
+        <td ><img th:src="${character.image}"  ></td>
+        <td th:text="${character.health}"></td>
+        <td th:text="${character.attack}"></td>
+        <td th:text="${character.speed}"></td>
+        <td th:text="${character.rune}"></td>
+    </tr>
+    </tbody>
+</table>
+<a href="add">더하다 </a>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>이미지 업로드</title>
+</head>
+<body>
+<h1>이미지 업로드 페이지</h1>
+<form id="uploadForm" enctype="multipart/form-data">
+  <input type="file" id="imageInput" name="image" accept="image/*" onchange="uploadImage(event)">
+  <button type="submit">업로드</button>
+</form>
+
+<script>
+  function uploadImage(event) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    fetch('/image', {
+      method: 'POST',
+      body: formData
+    })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text();
+            })
+            .then(result => {
+              // Handle the result after successful upload
+              console.log('Image uploaded:', result);
+              // 예를 들어, 이미지가 업로드되었다는 메시지를 사용자에게 보여줄 수 있습니다.
+              alert('이미지가 업로드되었습니다!');
+              // 또는 업로드된 이미지를 화면에 표시할 수도 있습니다.
+              // 여기서 result는 서버에서 받은 응답을 가정한 것이며, 실제 응답 형식에 따라 다를 수 있습니다.
+            })
+            .catch(error => {
+              // Handle errors during upload
+              console.error('Error uploading image:', error);
+              // 예를 들어, 업로드 실패 메시지를 사용자에게 보여줄 수 있습니다.
+              alert('이미지 업로드에 실패했습니다.');
+            });
+  }
+</script>
+</body>
+</html>
